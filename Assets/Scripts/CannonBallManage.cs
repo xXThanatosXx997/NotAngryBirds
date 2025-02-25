@@ -9,6 +9,8 @@ public class CannonBallManage : MonoBehaviour
     private Rigidbody2D rb;
     private bool hasStopped = false;
     [SerializeField] public GameObject parent;
+    public bool isExplosive = false;
+  
     void Start()
     {
         parent.GetOrAddComponent<CannonScript>().controlsOn = false;
@@ -17,14 +19,19 @@ public class CannonBallManage : MonoBehaviour
 
     void Update()
     {
-        if (!hasStopped && rb.velocity.magnitude < 1f)
+        if (isExplosive==false)
         {
-            Debug.Log("Cannonball has stopped moving.");
-            StartCoroutine("Cancel");
+            if (!hasStopped && rb.velocity.magnitude < 1f)
+            {
+                Debug.Log("Cannonball has stopped moving.");
+                StartCoroutine("Cancel");
+            }
+
         }
+       
     }
 
-    IEnumerator Cancel()
+    public IEnumerator Cancel()
     {
 
 
